@@ -1,0 +1,28 @@
+server:
+  port: ${SPRING_APPLICATION_PORT:8080}
+
+spring:
+  application:
+    name: spotless-backend
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/spotless_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres123}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  config:
+    import: optional:file:.env[.properties]
+
+jwt:
+  secret: ${JWT_SECRET:mySuperSecretKeyThatIsLongEnough123456!}
+  access-expiry: ${ACCESS_EXPIRATION:3600000}
